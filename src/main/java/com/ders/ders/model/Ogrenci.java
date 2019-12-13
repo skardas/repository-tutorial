@@ -1,12 +1,9 @@
 package com.ders.ders.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -33,7 +30,7 @@ public class Ogrenci extends ModelAudit{
             joinColumns = {@JoinColumn(name = "ogrenci_id")},
             inverseJoinColumns = {@JoinColumn(name = "ders_id")}
     )
-    Set<Ders> dersList;
+    private Set<Ders> alinanDersler;
 
     public Ogrenci(){
 
@@ -44,12 +41,12 @@ public class Ogrenci extends ModelAudit{
         this.lastName = lastName;
     }
 
-    public Set<Ders> getDersList() {
-        return dersList;
+    public Set<Ders> getAlinanDersler() {
+        return alinanDersler;
     }
 
-    public void setDersList(Set<Ders> dersList) {
-        this.dersList = dersList;
+    public void setAlinanDersler(Set<Ders> dersList) {
+        this.alinanDersler = dersList;
     }
 
     public Long getId() {

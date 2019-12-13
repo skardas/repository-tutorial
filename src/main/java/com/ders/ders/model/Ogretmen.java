@@ -30,10 +30,18 @@ public class Ogretmen extends ModelAudit{
             joinColumns = {@JoinColumn(name = "ogretmen_id")},
             inverseJoinColumns = {@JoinColumn(name = "ders_id")}
     )
-    Set<Ders> dersList;
+    private Set<Ders> verilenDersler;
 
     public Ogretmen(){
 
+    }
+
+    public Set<Ders> getVerilenDersler() {
+        return verilenDersler;
+    }
+
+    public void setVerilenDersler(Set<Ders> verilenDersler) {
+        this.verilenDersler = verilenDersler;
     }
 
     public Ogretmen(@Size(min = 2, max = 50) String firstName, @Size(min = 2, max = 50) String lastName) {

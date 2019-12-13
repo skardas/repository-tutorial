@@ -20,13 +20,11 @@ public class Ders extends ModelAudit{
 
     }
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "ogrenci_ders",
-            joinColumns = {@JoinColumn(name = "ders_id")},
-            inverseJoinColumns = {@JoinColumn(name = "ogrenci_id")}
-    )
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "alinanDersler")
     private Set<Ogrenci> ogrenciler;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "verilenDersler")
+    private Set<Ogretmen> ogretmenler;
 
     public Set<Ogrenci> getOgrenciler() {
         return ogrenciler;
