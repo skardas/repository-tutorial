@@ -3,21 +3,44 @@ package com.ders.ders.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "verilenders")
+@Table(name = "ogretmen_ders")
 public class VerilenDers extends ModelAudit{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "yil")
+    private Integer yil;
 
-    private int yil;
-
+    @Column(name = "donem")
     private String donem;
+
+    @ManyToOne
+    private Ders ders;
+
+    @ManyToOne
+    private Ogretmen ogretmen;
+
+    public Ders getDers() {
+        return ders;
+    }
+
+    public void setDers(Ders ders) {
+        this.ders = ders;
+    }
+
+    public Ogretmen getOgretmen() {
+        return ogretmen;
+    }
+
+    public void setOgretmen(Ogretmen ogretmen) {
+        this.ogretmen = ogretmen;
+    }
 
     public VerilenDers() {
     }
 
-    public VerilenDers(int yil,String donem) {
+    public VerilenDers(Integer yil, String donem) {
         this.yil = yil;
         this.donem = donem;
     }
@@ -30,11 +53,11 @@ public class VerilenDers extends ModelAudit{
         this.id = id;
     }
 
-    public int getYil() {
+    public Integer getYil() {
         return yil;
     }
 
-    public void setYil(int yil) {
+    public void setYil(Integer yil) {
         this.yil = yil;
     }
 

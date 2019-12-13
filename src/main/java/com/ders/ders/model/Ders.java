@@ -1,6 +1,7 @@
 package com.ders.ders.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "ders")
@@ -9,12 +10,30 @@ public class Ders extends ModelAudit{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "ders_name", unique = true)
     private String dersName;
+
+    @Column(name = "icerik")
     private String icerik;
 
     public Ders(){
 
+    }
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "ogrenci_ders",
+            joinColumns = {@JoinColumn(name = "ders_id")},
+            inverseJoinColumns = {@JoinColumn(name = "ogrenci_id")}
+    )
+    private Set<Ogrenci> ogrenciler;
+
+    public Set<Ogrenci> getOgrenciler() {
+        return ogrenciler;
+    }
+
+    public void setOgrenciler(Set<Ogrenci> ogrenciler) {
+        this.ogrenciler = ogrenciler;
     }
 
     public Ders(String dersName, String icerik) {

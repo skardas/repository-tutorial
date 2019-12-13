@@ -1,7 +1,10 @@
 package com.ders.ders.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 @Table(name = "ogretmen")
@@ -11,14 +14,23 @@ public class Ogretmen extends ModelAudit{
     private Long id;
 
 
-    @Column(nullable = false)
     @Size(min = 2, max = 50)
+    @Column(name = "first_name",nullable = false)
     private String firstName;
 
-    @Column(nullable = false)
     @Size(min = 2, max = 50)
+    @Column(name = "last_name",nullable = false)
     private String lastName;
 
+
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "ogretmen_ders",
+            joinColumns = {@JoinColumn(name = "ogretmen_id")},
+            inverseJoinColumns = {@JoinColumn(name = "ders_id")}
+    )
+    Set<Ders> dersList;
 
     public Ogretmen(){
 

@@ -2,31 +2,65 @@ package com.ders.ders.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
-@Table(name = "alinanders")
+@Table(name = "ogrenci_ders")
 public class AlinanDers extends ModelAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "donem", nullable = false)
     private String donem;
+
+    @Column(name = "yil", nullable = false)
     private int yil;
-    private Double nort;
+
+    @Column(name = "ortalama", nullable = false)
+    private Double ortalama;
 
 
+    @ManyToOne
+    private Ders ders;
 
-
+    @ManyToOne
+    private Ogrenci ogrenci;
 
     public  AlinanDers(){
 
     }
 
-    public AlinanDers(int yil,String donem,int not) {
+    public Ders getDers() {
+        return ders;
+    }
+
+    public void setDers(Ders ders) {
+        this.ders = ders;
+    }
+
+    public Ogrenci getOgrenci() {
+        return ogrenci;
+    }
+
+    public void setOgrenci(Ogrenci ogrenci) {
+        this.ogrenci = ogrenci;
+    }
+
+    public AlinanDers(int yil, String donem, int not) {
         this.yil = yil;
         this.donem = donem;
 
+    }
+
+
+    public Double getOrtalama() {
+        return ortalama;
+    }
+
+    public void setOrtalama(Double ortalama) {
+        this.ortalama = ortalama;
     }
 
     public Long getId() {
@@ -53,11 +87,4 @@ public class AlinanDers extends ModelAudit {
         this.donem = donem;
     }
 
-    public Double getNort() {
-        return nort;
-    }
-
-    public void setNort(Double nort) {
-        this.nort = nort;
-    }
 }
