@@ -1,12 +1,14 @@
 package com.ders.ders.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "ogretmen_ders")
 public class VerilenDers extends ModelAudit{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "yil")
@@ -19,6 +21,7 @@ public class VerilenDers extends ModelAudit{
     private Ders ders;
 
     @ManyToOne
+    @JsonIgnoreProperties("verilenDersler")
     private Ogretmen ogretmen;
 
     public Ders getDers() {

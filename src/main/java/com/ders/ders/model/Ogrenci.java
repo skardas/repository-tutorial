@@ -1,6 +1,7 @@
 package com.ders.ders.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -23,13 +24,13 @@ public class Ogrenci extends ModelAudit{
     @Size(min = 2, max = 50)
     private String lastName;
 
-    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "ogrenci_ders",
             joinColumns = {@JoinColumn(name = "ogrenci_id")},
             inverseJoinColumns = {@JoinColumn(name = "ders_id")}
     )
+    @JsonIgnoreProperties({"ogretmenler", "ogrenciler"})
     private Set<Ders> alinanDersler;
 
     public Ogrenci(){

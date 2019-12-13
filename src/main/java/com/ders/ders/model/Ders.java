@@ -20,20 +20,6 @@ public class Ders extends ModelAudit{
 
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "alinanDersler")
-    private Set<Ogrenci> ogrenciler;
-
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "verilenDersler")
-    private Set<Ogretmen> ogretmenler;
-
-    public Set<Ogrenci> getOgrenciler() {
-        return ogrenciler;
-    }
-
-    public void setOgrenciler(Set<Ogrenci> ogrenciler) {
-        this.ogrenciler = ogrenciler;
-    }
-
     public Ders(String dersName, String icerik) {
         this.dersName = dersName;
         this.icerik = icerik;

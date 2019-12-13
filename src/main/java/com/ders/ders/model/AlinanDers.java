@@ -1,5 +1,7 @@
 package com.ders.ders.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Set;
@@ -9,7 +11,7 @@ import java.util.Set;
 public class AlinanDers extends ModelAudit {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "donem", nullable = false)
@@ -22,10 +24,11 @@ public class AlinanDers extends ModelAudit {
     private Double ortalama;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Ders ders;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("alinanDersler")
     private Ogrenci ogrenci;
 
     public  AlinanDers(){
