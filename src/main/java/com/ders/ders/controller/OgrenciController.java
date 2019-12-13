@@ -47,17 +47,18 @@ public class OgrenciController {
     }
 
     @GetMapping("/student/{ogrenciId}/ogretmenler")
-    public Set<Ders> getOgrenciAldigiDerslerinOgretmenleri(@PathVariable Long ogrenciId)
+    public Set<Ogretmen> getOgrenciAldigiDerslerinOgretmenleri(@PathVariable Long ogrenciId)
     {
         Ogrenci ogrenci = ogrenciRepository.findById(ogrenciId).orElseThrow(()->new ResourceNotFoundException(" Ogrenci Bulunamadı", ogrenciId));
         Set<Ogretmen> ogretmenler = new HashSet<>();
 
         for(Ders ders: ogrenci.getAlinanDersler())
         {
-            alinanDersRepository.fi
+            for (VerilenDers o:  verilenDersRepository.findAllByDersId(ders.getId()))
+                ogretmenler.add(o.getOgretmen());
         }
 
-        return ogrenci.getAlinanDersler();
+        return ogretmenler;
     }
 
 }
